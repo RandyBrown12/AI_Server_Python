@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import PlainTextResponse
+from fastapi.middleware.cors import CORSMiddleware
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import torch
 import os 
@@ -34,6 +35,16 @@ model_pipeline = pipeline(
     model=model,
     tokenizer=tokenizer,
     device=device,  # Pass device to use GPU if available
+)
+
+origins = ["http://localhost:5173"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["POST"],
+    allow_headers=["*"]
 )
 
 print("Server is ready to accept requests!")
