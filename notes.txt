@@ -1,7 +1,0 @@
-Running the Applcation: uvicorn app:app --reload
-Test Request: curl -X POST http://localhost:8000 -d "Describe what an LLM is"
-
-Create an ENV File with
-model_id
-local_model_path
-system_content
